@@ -1,23 +1,60 @@
 package com.example.socketchatapp.data
 
+import com.example.socketchatapp.data.dto.MessagesDto
 import com.example.socketchatapp.domain.model.Message
 import com.example.socketchatapp.util.Resource
-import kotlinx.coroutines.flow.Flow
+import io.ktor.client.*
+import io.ktor.client.features.websocket.*
+import io.ktor.client.request.*
+import io.ktor.http.cio.websocket.*
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.isActive
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
-class ChatSocketServiceImpl: ChatSocketService {
+class ChatSocketServiceImpl(private val client: HttpClient): ChatSocketService {
+
+    private var socket: WebSocketSession? = null
+
     override suspend fun initSession(username: String): Resource<Unit> {
-        TODO("Not yet implemented")
+        return try {
+            socket = client.webSocketSession {
+                url("${ChatSocketService.Endpoints.ChatSocket.url}?username=$username")
+            }
+            if (socket?.isActive == true){
+                Resource.Success(Unit)
+            }else Resource.Error("Cant Connect")
+        }catch (e: Exception){
+            e.printStackTrace()
+            Resource.Error(e.localizedMessage ?: "IDK ERROR")
+        }
     }
 
     override suspend fun sendMessage(message: String) {
-        TODO("Not yet implemented")
+        try {
+            socket?.send(Frame.Text(message))
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     override fun observeMessage(): Flow<Message> {
-        TODO("Not yet implemented")
+        return try {
+            socket?.incoming
+                ?.receiveAsFlow()
+                ?.filter { it is Frame.Text }
+                ?.map {
+                    val json = (it as? Frame.Text)?.readText() ?: ""
+                    val messageDto = Json.decodeFromString<MessagesDto>(json)
+                    messageDto.toMessages()
+                } ?: flow {  }
+        }catch (e: Exception){
+            e.printStackTrace()
+            flow {  }
+        }
     }
 
     override suspend fun closeSession() {
-        TODO("Not yet implemented")
+        socket?.close()
     }
 }
