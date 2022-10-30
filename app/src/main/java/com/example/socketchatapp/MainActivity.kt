@@ -10,7 +10,6 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.socketchatapp.ui.theme.SocketChatAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,12 +17,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SocketChatAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    App()
                 }
             }
         }
@@ -31,14 +29,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
+fun App() {
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SocketChatAppTheme {
-        Greeting("Android")
-    }
 }
