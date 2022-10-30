@@ -1,4 +1,4 @@
-package com.example.socketchatapp.ui.theme
+package com.example.socketchatapp.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

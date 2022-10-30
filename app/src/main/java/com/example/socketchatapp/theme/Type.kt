@@ -1,4 +1,4 @@
-package com.example.socketchatapp.ui.theme
+package com.example.socketchatapp.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
