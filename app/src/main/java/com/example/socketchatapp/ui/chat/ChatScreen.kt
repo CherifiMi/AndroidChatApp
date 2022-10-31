@@ -1,5 +1,6 @@
 package com.example.socketchatapp.ui.chat
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -9,4 +10,6 @@ fun ChatScreen(
     viewModel: ChatViewModel = hiltViewModel()
 ) {
 
+    Text(text = username ?: "noop")
+    
 }
