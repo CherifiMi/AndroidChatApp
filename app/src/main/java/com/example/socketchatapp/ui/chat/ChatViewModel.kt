@@ -1,5 +1,6 @@
 package com.example.socketchatapp.ui.chat
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -84,6 +85,8 @@ class ChatViewModel @Inject constructor(
             if (messageText.value.isNotBlank()){
                 chatSocketService.sendMessage(messageText.value)
             }
+            Log.d("SOCKETTEST", state.value.messages.toString()
+            )
         }
     }
 
