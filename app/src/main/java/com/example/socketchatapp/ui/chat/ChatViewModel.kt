@@ -1,8 +1,16 @@
 package com.example.socketchatapp.ui.chat
 
+import android.os.Build
+import android.os.VibrationEffect
 import android.util.Log
+import android.view.HapticFeedbackConstants
+import android.view.View
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalView
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

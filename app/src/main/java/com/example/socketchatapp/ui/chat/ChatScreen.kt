@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -85,7 +86,8 @@ fun ChatScreen(
                             .width(200.dp)
                             .background(
                                 color = if (isOwnMessage) Color.Blue else Color.DarkGray,
-                                shape = RoundedCornerShape(10.dp))
+                                shape = RoundedCornerShape(10.dp)
+                            )
                             .padding(8.dp)
                     ) {
                         Text(
